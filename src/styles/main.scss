@@ -1,39 +1,6 @@
+@import "./components/grids.scss";
+
 body {
-  background-color: white;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 1px;
-  background-color: black;
-  padding: 1px;
-  height: 95vh;
-  margin: 20px;
-}
-
-/* .grid-container {
-      display: flex;
-  } */
-
-.grid-container > div {
-  background-color: white;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
-  overflow: scroll;
-}
-
-.grid-container > div:hover {
-  padding: 50px;
-  padding-bottom: 60vh;
-}
-
-.item1 {
-  grid-row-start: 1;
-  grid-row-end: 5;
-}
-
-body::-webkit-scrollbar {
-  display: none;
+  background-color: #fefefe;
+  color: #181818;
 }

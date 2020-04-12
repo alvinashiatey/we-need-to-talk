@@ -1,3 +1,4 @@
+import "./styles/reset/reset.scss";
 import "./styles/main.scss";
 import axios from "axios";
 
@@ -11,7 +12,6 @@ const apiCall = async () => {
     .then((res) => {
       const transcription = document.getElementById("transcription");
       const dataTrs = res.data.contents[0].content_html;
-      console.log(dataTrs);
       transcription.innerHTML = dataTrs;
     })
     .catch((err) => {
