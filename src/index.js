@@ -13,7 +13,16 @@ const apiCall = async () => {
     .then((res) => {
       const transcription = document.getElementById("transcription");
       const dataTrs = res.data.contents[0].content_html;
-      transcription.innerHTML = dataTrs;
+      const interviewReq = document.querySelector(".interview__req");
+      interviewReq.addEventListener("click", (e) => {
+        e.preventDefault();
+        transcription.innerHTML = dataTrs;
+        if ("caches" in window) {
+          caches.open("interviews").then((cache) => {
+            cache.add(makeURL(1, 1));
+          });
+        }
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -29,5 +38,23 @@ if (
   (window.location.protocol === "https:" ||
     window.location.hostname === "localhost")
 ) {
-  const registration = runtime.register();
+  //Dont register till everything is okay
+  //const registration = runtime.register();
 }
+
+//music
+
+const musicPlayer = () => {
+  let playing = true;
+  let song = document.querySelector(".song");
+  let play = document.getElementById("play");
+
+  play.addEventListener("click", () => {
+    if (playing) {
+      song.play();
+      playing = false;
+    }
+  });
+};
+
+musicPlayer();

@@ -9,7 +9,7 @@ const ServiceWorkerWebpackPlugin = require("serviceworker-webpack-plugin");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "./dist/scripts"),
+    path: path.resolve(__dirname, "./dist"),
     filename: "index.js",
     publicPath: "/",
   },
@@ -33,6 +33,10 @@ module.exports = {
         to: "./manifest.json",
         toType: "file",
       },
+      {
+        from: "./src/assets/",
+        to: "./assets/",
+      },
     ]),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, "src/sw.js"),
@@ -52,12 +56,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.svg$/,
+        loader: "svg-inline-loader",
+      },
+      {
+        test: /\.(png|jpe?g|gif|mp3)$/i,
         use: [
           {
             loader: "file-loader",
             options: {
-              outputPath: "images",
+              outputPath: "assets",
             },
           },
         ],
