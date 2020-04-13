@@ -9,10 +9,8 @@
   background: black;
   & > div {
     background: white;
-    padding: 20px 0;
     font-size: 1.5rem;
     padding: 1.5rem;
-    overflow: scroll;
   }
   .item1 {
     grid-row: 2 / span 3;

@@ -2,6 +2,7 @@
   grid-column: page-start / page-end;
   background: $color-primary !important;
   color: #fefefe;
+  overflow: hidden;
   .scroll {
     display: flex;
     flex-wrap: nowrap;
@@ -9,6 +10,7 @@
     section {
       backface-visibility: hidden;
       animation: slide-left 8000ms linear infinite;
+      padding-left: 0.5rem;
       @keyframes slide-left {
         from {
           -webkit-transform: translateX(0);
