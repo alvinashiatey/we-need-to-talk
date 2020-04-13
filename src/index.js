@@ -48,11 +48,19 @@ const musicPlayer = () => {
   let playing = true;
   let song = document.querySelector(".song");
   let play = document.getElementById("play");
+  let iconChnage = document.querySelector("#play use");
+
+  console.log();
 
   play.addEventListener("click", () => {
     if (playing) {
       song.play();
       playing = false;
+      iconChnage.setAttribute("xlink:href", "/assets/sprite.svg#icon-pause");
+    } else {
+      song.pause();
+      playing = true;
+      iconChnage.setAttribute("xlink:href", "/assets/sprite.svg#icon-play3");
     }
   });
 };
