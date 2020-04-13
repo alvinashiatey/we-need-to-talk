@@ -1,6 +1,7 @@
 import "./styles/reset/reset.scss";
 import "./styles/main.scss";
 import axios from "axios";
+import runtime from "serviceworker-webpack-plugin/lib/runtime";
 
 const apiCall = async () => {
   const channel = "bryant-wells-eeaqnoam1yc";
@@ -21,4 +22,18 @@ const apiCall = async () => {
 
 apiCall();
 
-//
+//service worker
+
+if (
+  "serviceWorker" in navigator &&
+  (window.location.protocol === "https:" ||
+    window.location.hostname === "localhost")
+) {
+  const registration = runtime.register();
+  console.log("registration is done");
+
+  // window.addEventListener("beforeinstallprompt", (e) => {
+  //   e.preventDefault();
+  //   console.log("chrome tried to install");
+  // });
+}

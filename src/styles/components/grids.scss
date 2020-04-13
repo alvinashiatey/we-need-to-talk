@@ -1,6 +1,6 @@
 .grid-container {
   display: grid;
-  grid-template-columns: 1.2fr 3fr 1fr;
+  grid-template-columns: [page-start] 1fr [col-end1 col-start2] 3fr [col-end2 col-start3] 1fr [page-end];
   grid-gap: 1px;
   background-color: black;
   padding: 1px;
@@ -24,7 +24,7 @@
   }
   .item2 {
     grid-row: 2 / span 3;
-    grid-column: 2/3;
+    grid-column: col-start2 / col-end2;
     scrollbar-width: none;
     #transcription {
       padding: 1rem;
