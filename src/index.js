@@ -30,10 +30,4 @@ if (
     window.location.hostname === "localhost")
 ) {
   const registration = runtime.register();
-  console.log("registration is done");
-
-  // window.addEventListener("beforeinstallprompt", (e) => {
-  //   e.preventDefault();
-  //   console.log("chrome tried to install");
-  // });
 }

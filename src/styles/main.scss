@@ -1,6 +1,13 @@
 @import "./components/grids.scss";
+@import "./components/typography.scss";
 
 body {
   background-color: #fefefe;
   color: #181818;
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+.wrapper {
+  margin: 0 auto;
 }
