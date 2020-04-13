@@ -1,0 +1,16 @@
+.item2 {
+  grid-row: 2 / span 3;
+  grid-column: col-start2 / col-end2;
+  height: calc(100vh - 6rem);
+  #transcription {
+    scrollbar-width: none;
+    padding: 1rem;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.3rem;
+    text-align: left;
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.3rem;
+    }
+  }
+}
