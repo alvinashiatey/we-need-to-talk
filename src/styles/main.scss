@@ -1,4 +1,5 @@
 @import "./components/variables.scss";
+@import "./components/scroll.scss";
 @import "./components/grids.scss";
 @import "./components/typography.scss";
 @import "./components/footer.scss";
@@ -12,6 +13,7 @@ body {
   font-size: 62.5%;
   font-family: "Hepta Slab", serif;
   background: $color-primary;
+  scrollbar-width: thin;
 }
 
 .wrapper {

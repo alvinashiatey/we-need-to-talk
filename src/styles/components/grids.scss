@@ -9,17 +9,14 @@
   background: black;
   & > div {
     background: white;
-    padding: 20px 0;
     font-size: 1.5rem;
     padding: 1.5rem;
-    overflow: scroll;
   }
   .item1 {
-    grid-row-start: 2;
-    grid-row-end: 5;
+    grid-row: 2 / span 3;
   }
 
-  .item7 {
-    grid-column: page-start / col-end2;
+  .item3 {
+    grid-row: 2 / span 3;
   }
 }
