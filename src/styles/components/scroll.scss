@@ -1,0 +1,24 @@
+.item4 {
+  grid-column: page-start / page-end;
+  background: $color-primary !important;
+  color: #fefefe;
+  .scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    section {
+      backface-visibility: hidden;
+      animation: slide-left 8000ms linear infinite;
+      @keyframes slide-left {
+        from {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+        }
+        to {
+          -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+        }
+      }
+    }
+  }
+}

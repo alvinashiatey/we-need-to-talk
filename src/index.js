@@ -50,8 +50,6 @@ const musicPlayer = () => {
   let play = document.getElementById("play");
   let iconChnage = document.querySelector("#play use");
 
-  console.log();
-
   play.addEventListener("click", () => {
     if (playing) {
       song.play();
