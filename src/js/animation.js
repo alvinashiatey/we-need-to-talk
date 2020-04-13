@@ -6,6 +6,7 @@ let revealBtn = (div, dur) => {
   });
   gsap.from(div, dur, {
     x: -100,
+    opacity: 0,
     ease: "power3.inOut",
   });
 };

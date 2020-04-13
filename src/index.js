@@ -4,15 +4,17 @@ import { revealBtn } from "./js/animation";
 import axios from "axios";
 import runtime from "serviceworker-webpack-plugin/lib/runtime";
 
+const musicDiv = document.querySelector(".music__btn");
+const transcription = document.getElementById("transcription");
+
 const apiCall = async () => {
   const channel = "bryant-wells-eeaqnoam1yc";
   const makeURL = (page, per) =>
     `http://api.are.na/v2/channels/${channel}?page=${page}&amp;per=${per}`;
 
-  axios
+  const data = axios
     .get(makeURL(1, 1))
     .then((res) => {
-      const transcription = document.getElementById("transcription");
       const dataTrs = res.data.contents[0].content_html;
       const interviewReq = document.querySelector(".interview__req");
 
@@ -25,10 +27,13 @@ const apiCall = async () => {
           });
         }
       });
+      return dataTrs;
     })
     .catch((err) => {
       console.log(err);
     });
+
+  return data;
 };
 
 apiCall();
@@ -72,7 +77,6 @@ musicPlayer();
 
 //Animation calls
 const animationCalls = () => {
-  const musicDiv = document.querySelector(".music__btn");
   const interviewReq = document.querySelector(".interview__req");
   let state = true;
   interviewReq.addEventListener("click", (e) => {
@@ -85,3 +89,32 @@ const animationCalls = () => {
 };
 
 animationCalls();
+
+//sticky top fucntion
+
+const stickyNav = () => {
+  if (musicDiv) {
+    let stickTop = musicDiv.offsetTop;
+    document.addEventListener("scroll", () => {
+      if (window.scrollY >= stickTop) {
+        musicDiv.classList.add("fixedNav");
+      } else {
+        musicDiv.classList.remove("fixedNav");
+      }
+    });
+  }
+};
+
+stickyNav();
+
+// loop through links
+
+const loopLinks = () => {
+  const data = apiCall();
+  const linkArray = document.querySelectorAll("#transcription a");
+  data.then((res) => {
+    console.log(res);
+  });
+};
+
+loopLinks();
