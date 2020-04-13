@@ -1,53 +1,25 @@
 .grid-container {
   display: grid;
-  grid-template-columns: [page-start] 1fr [col-end1 col-start2] 3fr [col-end2 col-start3] 1fr [page-end];
-  grid-gap: 1px;
-  background-color: black;
+  grid-template-columns:
+    [page-start] minmax(min-content, 1fr)
+    [col-end1 col-start2] 3fr [col-end2 col-start3] minmax(min-content, 1fr)
+    [page-end];
+  gap: 2px;
   padding: 1px;
-
+  background: black;
   & > div {
-    background-color: white;
-    text-align: center;
+    background: white;
     padding: 20px 0;
-    font-size: 3rem;
+    font-size: 1.5rem;
+    padding: 1.5rem;
     overflow: scroll;
-  }
-
-  .header {
-    grid-row-start: 1;
-    grid-column: 1 / -1;
   }
   .item1 {
     grid-row-start: 2;
     grid-row-end: 5;
   }
-  .item2 {
-    grid-row: 2 / span 3;
-    grid-column: col-start2 / col-end2;
-    height: calc(100vh - 6rem);
-    #transcription {
-      scrollbar-width: none;
 
-      padding: 1rem;
-      font-family: "Courier New", Courier, monospace;
-      font-size: 1rem;
-      text-align: left;
-      p {
-        margin-bottom: 1rem;
-        line-height: 1.3rem;
-      }
-    }
-  }
   .item7 {
     grid-column: page-start / col-end2;
   }
 }
-
-/* .grid-container {
-        display: flex;
-    } */
-
-// .grid-container > div:hover {
-//   padding: 50px;
-//   padding-bottom: 60vh;
-// }

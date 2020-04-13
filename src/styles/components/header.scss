@@ -1,0 +1,12 @@
+.header {
+  grid-column: page-start / page-end;
+  background-color: pink;
+  .heading--1 {
+    font-size: 2rem;
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: $color-primary;
+    }
+  }
+}

@@ -1,12 +1,17 @@
+@import "./components/variables.scss";
 @import "./components/grids.scss";
 @import "./components/typography.scss";
 @import "./components/footer.scss";
+@import "./components/interviewers.scss";
+@import "./components/header.scss";
+@import url("https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@400;600;700;900&display=swap");
 
 body {
   background-color: #fefefe;
-  color: #181818;
+  color: $color-primary;
   font-size: 62.5%;
-  font-family: sans-serif;
+  font-family: "Hepta Slab", serif;
+  background: $color-primary;
 }
 
 .wrapper {
