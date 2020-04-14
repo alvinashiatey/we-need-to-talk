@@ -7,6 +7,12 @@ import runtime from "serviceworker-webpack-plugin/lib/runtime";
 const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
 
+const addTargetLink = (str, loc) => {
+  const regSpaceBtnA = /((?<=<a)\s(?=href))/gi;
+  const pArr = str.replace(regSpaceBtnA, "$1target='_blank'");
+  loc.innerHTML = pArr;
+};
+
 const apiCall = async () => {
   const channel = "bryant-wells-eeaqnoam1yc";
   const makeURL = (page, per) =>
@@ -20,7 +26,7 @@ const apiCall = async () => {
 
       interviewReq.addEventListener("click", (e) => {
         e.preventDefault();
-        transcription.innerHTML = dataTrs;
+        addTargetLink(dataTrs, transcription);
         if ("caches" in window) {
           caches.open("interviews").then((cache) => {
             cache.add(makeURL(1, 1));
@@ -46,7 +52,7 @@ if (
     window.location.hostname === "localhost")
 ) {
   //Dont register till everything is okay
-  const registration = runtime.register();
+  //const registration = runtime.register();
 }
 
 //music
@@ -110,10 +116,12 @@ stickyNav();
 
 const loopLinks = () => {
   const data = apiCall();
+  const regA = /<a\s/gi;
+  const regSpaceBtnA = /((?<=<a)\s(?=href))/gi;
+  const regex = /<a\s[\w].*?\>/gi;
   const linkArray = document.querySelectorAll("#transcription a");
   data.then((res) => {
-    console.log(res);
+    const pArr = res.replace(regSpaceBtnA, "$1target='_blank'");
+    console.log(pArr);
   });
 };
-
-loopLinks();
