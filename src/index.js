@@ -85,7 +85,6 @@ const animationCalls = () => {
       revealBtn(musicDiv, 0.6);
     }
   });
-  console.log(state);
 };
 
 animationCalls();
