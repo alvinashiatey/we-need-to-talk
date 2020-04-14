@@ -46,7 +46,7 @@ if (
     window.location.hostname === "localhost")
 ) {
   //Dont register till everything is okay
-  //const registration = runtime.register();
+  const registration = runtime.register();
 }
 
 //music
