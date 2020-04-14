@@ -12,15 +12,16 @@
     "type": "git",
     "url": "git+https://github.com/ayoungblood2/we-need-to-talk.git"
   },
-  "author": "Alvin Ashiate & Avery Young Blood",
+  "author": "Alvin Ashiatey & Avery Young Blood",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ayoungblood2/we-need-to-talk/issues"
   },
   "homepage": "https://github.com/ayoungblood2/we-need-to-talk#readme",
   "devDependencies": {
-    "@babel/core": "^7.8.7",
+    "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.8.7",
+    "@babel/runtime-corejs3": "^7.9.2",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
@@ -37,6 +38,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.2",
     "gsap": "^3.2.6",
     "serviceworker-webpack-plugin": "^1.0.1"
