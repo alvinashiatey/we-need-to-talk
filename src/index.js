@@ -8,8 +8,8 @@ const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
 
 const addTargetLink = (str, loc) => {
-  const regSpaceBtnA = /((?<=<a)\s(?=href))/gi;
-  const pArr = str.replace(regSpaceBtnA, "$1target='_blank'");
+  const regSpaceBtnA = /((<a)\s(?=href))/gi;
+  const pArr = str.replace(regSpaceBtnA, "$1 target='_blank'");
   loc.innerHTML = pArr;
 };
 
@@ -117,11 +117,11 @@ stickyNav();
 const loopLinks = () => {
   const data = apiCall();
   const regA = /<a\s/gi;
-  const regSpaceBtnA = /((?<=<a)\s(?=href))/gi;
+  const regSpaceBtnA = /((<a)\s(?=href))/gi;
   const regex = /<a\s[\w].*?\>/gi;
   const linkArray = document.querySelectorAll("#transcription a");
   data.then((res) => {
-    const pArr = res.replace(regSpaceBtnA, "$1target='_blank'");
+    const pArr = res.replace(regSpaceBtnA, "$1 target='_blank' ");
     console.log(pArr);
   });
 };
