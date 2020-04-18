@@ -7,10 +7,19 @@ import runtime from "serviceworker-webpack-plugin/lib/runtime";
 const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
 
-const addTargetLink = (str, loc) => {
+const addTargetLink = (str) => {
   const regSpaceBtnA = /((<a)\s(?=href))/gi;
-  const pArr = str.replace(regSpaceBtnA, "$1 target='_blank'");
-  loc.innerHTML = pArr;
+  let pArr = str.replace(regSpaceBtnA, "$1 target='_blank' ");
+  return pArr;
+};
+
+const classnameTag = (str2, loc2) => {
+  const regB = /(<)(p)(>)(Bryant:)/gi;
+  let sArr = str2.replace(
+    regB,
+    '$1$2 class = "int__paragraph" $3 <span class = "int__name">$4</span> '
+  );
+  loc2.innerHTML = sArr;
 };
 
 const apiCall = async () => {
@@ -26,7 +35,11 @@ const apiCall = async () => {
 
       interviewReq.addEventListener("click", (e) => {
         e.preventDefault();
-        addTargetLink(dataTrs, transcription);
+
+        //Regex funtion on strings
+        let text = addTargetLink(dataTrs);
+        classnameTag(text, transcription);
+
         if ("caches" in window) {
           caches.open("interviews").then((cache) => {
             cache.add(makeURL(1, 1));
