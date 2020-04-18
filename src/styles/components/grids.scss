@@ -1,22 +1,22 @@
 .grid-container {
   display: grid;
   grid-template-columns:
-    [page-start] minmax(min-content, 1fr)
+    [page-start] auto [col-end0 col-start1] minmax(min-content, 1fr)
     [col-end1 col-start2] 3fr [col-end2 col-start3] minmax(min-content, 1fr)
     [page-end];
   gap: 2px;
   padding: 1px;
-  background: black;
   & > div {
-    background: white;
-    font-size: 1.5rem;
+    background-color: #f7f6ee;
     padding: 1.5rem;
   }
   .item1 {
+    grid-column: col-start1 / col-end1;
     grid-row: 2 / span 3;
   }
 
   .item3 {
+    grid-column: col-start3 / page-end;
     grid-row: 2 / span 3;
   }
 }
