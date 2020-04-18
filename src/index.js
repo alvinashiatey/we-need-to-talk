@@ -12,7 +12,7 @@ import gsap from "gsap";
 
 const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
-const interviewP = document.querySelectorAll("#transcription p");
+const interviewReq = document.querySelector(".interview__req");
 
 const addTargetLink = (str) => {
   const regSpaceBtnA = /((<a)\s(?=href))/gi;
@@ -20,7 +20,7 @@ const addTargetLink = (str) => {
   return pArr;
 };
 
-const classnameTag = (str2, loc2, p) => {
+const classnameTag = (str2, loc2) => {
   const regB = /(<)(p)(>)(Bryant:)/gi;
   let sArr = str2.replace(
     regB,
@@ -33,23 +33,39 @@ const apiCall = async () => {
   const channel = "bryant-wells-eeaqnoam1yc";
   const makeURL = (page, per) =>
     `https://api.are.na/v2/channels/${channel}?page=${page}&amp;per=${per}`;
-  const url = "https://api.are.na/v2/channels/652012/contents";
 
   const data = axios
-    .get(makeURL(1, 1))
+    .get(makeURL(1, 100))
     .then((res) => {
       const dataTrs = res.data.contents[0].content_html;
-      const interviewReq = document.querySelector(".interview__req");
+      const imgArr = res.data.contents;
+      const refPanel = document.querySelector(".img__postion");
       interviewReq.addEventListener("click", (e) => {
         e.preventDefault();
 
-        gsap.set(interviewReq, {
-          writingMode: "vertical-rl",
-        });
         //Regex funtion on strings
         let text = addTargetLink(dataTrs);
-        classnameTag(text, transcription, interviewP);
+        classnameTag(text, transcription);
         //revealparagraph(transcription.children, 0.1);
+
+        const template = (link) =>
+          `<img src="${link}" alt="bryant-wells" style = "width: 100%">`;
+
+        for (let i = 1; i < imgArr.length; i++) {
+          const e = imgArr[i].image;
+          if (e) {
+            let elink = imgArr[i].image.display.url;
+            refPanel.insertAdjacentHTML("beforeend", template(elink));
+          } else if (e === null) {
+            let vlink = imgArr[i].attachment.url;
+            refPanel.insertAdjacentHTML("beforeend", template(vlink));
+          }
+        }
+
+        gsap.set(interviewReq, {
+          writingMode: "vertical-rl",
+          paddingRight: "1em",
+        });
 
         if ("caches" in window) {
           caches.open("interviews").then((cache) => {
@@ -63,24 +79,6 @@ const apiCall = async () => {
       console.log(err);
     });
 
-  //images
-  axios.get(url).then((res) => {
-    const imgArr = res.data.contents;
-    const refPanel = document.querySelector(".img__postion");
-    const template = (link) =>
-      `<img src="${link}" alt="bryant-wells" style = "width: 100%">`;
-
-    for (let i = 1; i < imgArr.length; i++) {
-      const e = imgArr[i].image;
-      if (e) {
-        let elink = imgArr[i].image.display.url;
-        refPanel.insertAdjacentHTML("beforeend", template(elink));
-      } else if (e === null) {
-        let vlink = imgArr[i].attachment.url;
-        refPanel.insertAdjacentHTML("beforeend", template(vlink));
-      }
-    }
-  });
   return data;
 };
 
@@ -171,13 +169,16 @@ const stickyNav = () => {
 
 stickyNav();
 
-// loop through links
+// scrolling
 
-const loopLinks = () => {
-  let interviewReq = document.querySelector(".interview__req").innerHTML;
-  let letter = interviewReq.split(/(\w)/i);
-  let fLetter = letter[1];
-  console.log(fLetter);
+const scrollDiv = () => {
+  const scrllpara = (e, d, s) => {
+    const moveDiv = document.querySelector(`.${e}`);
+    moveDiv.style.top = `-${d * s}px`;
+  };
+  const interviewDiv = document.querySelector(".item2");
+  interviewDiv.addEventListener("scroll", () => {
+    scrllpara("img__postion", interviewDiv.scrollTop, 2);
+  });
 };
-
-loopLinks();
+scrollDiv();

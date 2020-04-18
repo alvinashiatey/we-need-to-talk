@@ -1,9 +1,9 @@
 .item2 {
   grid-row: 2 / span 3;
   grid-column: col-start2 / col-end2;
-  overflow: scroll;
-  // height: calc(100vh - 10.2rem);
-  height: auto;
+  overflow-y: scroll;
+  height: calc(100vh - 9.3rem);
+
   position: relative;
   .music__btn {
     visibility: hidden;
