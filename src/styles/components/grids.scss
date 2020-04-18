@@ -1,7 +1,7 @@
 .grid-container {
   display: grid;
   grid-template-columns:
-    [page-start] auto [col-end0 col-start1] minmax(min-content, 1fr)
+    [page-start] auto [col-end0 col-start1] minmax(min-content, auto)
     [col-end1 col-start2] 3fr [col-end2 col-start3] minmax(min-content, 1fr)
     [page-end];
   gap: 2px;
@@ -13,10 +13,29 @@
   .item1 {
     grid-column: col-start1 / col-end1;
     grid-row: 2 / span 3;
+    .interview__req {
+      cursor: pointer;
+    }
   }
 
   .item3 {
     grid-column: col-start3 / page-end;
     grid-row: 2 / span 3;
+    .img__postion {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(2, autofit);
+
+      img {
+        filter: grayscale(100%);
+
+        &:hover {
+          filter: grayscale(0%);
+        }
+      }
+    }
   }
 }

@@ -8,6 +8,7 @@ import {
 } from "./js/animation";
 import axios from "axios";
 import runtime from "serviceworker-webpack-plugin/lib/runtime";
+import gsap from "gsap";
 
 const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
@@ -32,6 +33,7 @@ const apiCall = async () => {
   const channel = "bryant-wells-eeaqnoam1yc";
   const makeURL = (page, per) =>
     `https://api.are.na/v2/channels/${channel}?page=${page}&amp;per=${per}`;
+  const url = "https://api.are.na/v2/channels/652012/contents";
 
   const data = axios
     .get(makeURL(1, 1))
@@ -41,6 +43,9 @@ const apiCall = async () => {
       interviewReq.addEventListener("click", (e) => {
         e.preventDefault();
 
+        gsap.set(interviewReq, {
+          writingMode: "vertical-rl",
+        });
         //Regex funtion on strings
         let text = addTargetLink(dataTrs);
         classnameTag(text, transcription, interviewP);
@@ -58,10 +63,26 @@ const apiCall = async () => {
       console.log(err);
     });
 
+  //images
+  axios.get(url).then((res) => {
+    const imgArr = res.data.contents;
+    const refPanel = document.querySelector(".img__postion");
+    const template = (link) =>
+      `<img src="${link}" alt="bryant-wells" style = "width: 100%">`;
+
+    for (let i = 1; i < imgArr.length; i++) {
+      const e = imgArr[i].image;
+      if (e) {
+        let elink = imgArr[i].image.display.url;
+        refPanel.insertAdjacentHTML("beforeend", template(elink));
+      } else if (e === null) {
+        let vlink = imgArr[i].attachment.url;
+        refPanel.insertAdjacentHTML("beforeend", template(vlink));
+      }
+    }
+  });
   return data;
 };
-
-apiCall();
 
 //service worker
 
@@ -153,13 +174,10 @@ stickyNav();
 // loop through links
 
 const loopLinks = () => {
-  const data = apiCall();
-  const regA = /<a\s/gi;
-  const regSpaceBtnA = /((<a)\s(?=href))/gi;
-  const regex = /<a\s[\w].*?\>/gi;
-  const linkArray = document.querySelectorAll("#transcription a");
-  data.then((res) => {
-    const pArr = res.replace(regSpaceBtnA, "$1 target='_blank' ");
-    console.log(pArr);
-  });
+  let interviewReq = document.querySelector(".interview__req").innerHTML;
+  let letter = interviewReq.split(/(\w)/i);
+  let fLetter = letter[1];
+  console.log(fLetter);
 };
+
+loopLinks();
