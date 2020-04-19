@@ -178,7 +178,7 @@ const scrollDiv = () => {
   };
   const interviewDiv = document.querySelector(".item2");
   interviewDiv.addEventListener("scroll", () => {
-    scrllpara("img__postion", interviewDiv.scrollTop, 2);
+    scrllpara("img__postion", interviewDiv.scrollTop, 1.5);
   });
 };
 scrollDiv();

@@ -3,14 +3,18 @@
   grid-row: 1 / span 5;
   background: $color-primary !important;
   position: relative;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: white;
   line-height: 1.1rem;
+  justify-self: center;
+  padding-left: 0 !important;
   &__btn {
-    background-color: green;
     z-index: 3;
     cursor: pointer;
     p {
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      padding: 0 0.5rem;
       writing-mode: vertical-rl;
       text-orientation: upright;
     }
