@@ -14,6 +14,11 @@ const musicDiv = document.querySelector(".music__btn");
 const transcription = document.getElementById("transcription");
 const interviewReq = document.querySelector(".interview__req");
 
+const scrllpara = (e, d, r) => {
+  const moveDiv = document.querySelector(`.${e}`);
+  moveDiv.style.top = `-${d.scrollTop * r}px`;
+};
+
 const addTargetLink = (str) => {
   const regSpaceBtnA = /((<a)\s(?=href))/gi;
   let pArr = str.replace(regSpaceBtnA, "$1 target='_blank' ");
@@ -46,6 +51,22 @@ const apiCall = async () => {
         //Regex funtion on strings
         let text = addTargetLink(dataTrs);
         classnameTag(text, transcription);
+        const interviewDiv = document.querySelector(".item2");
+        let div1Height = transcription.clientHeight;
+        let div2Height = refPanel.clientHeight * imgArr.length;
+        let scrollRatio =
+          div2Height > div1Height
+            ? div2Height / div1Height
+            : div1Height / div2Height;
+
+        console.log(div1Height);
+        console.log(div2Height);
+        console.log(scrollRatio);
+
+        interviewDiv.addEventListener("scroll", () => {
+          scrllpara("img__postion", interviewDiv, scrollRatio);
+        });
+
         //revealparagraph(transcription.children, 0.1);
 
         const template = (link) =>
@@ -170,15 +191,3 @@ const stickyNav = () => {
 stickyNav();
 
 // scrolling
-
-const scrollDiv = () => {
-  const scrllpara = (e, d, s) => {
-    const moveDiv = document.querySelector(`.${e}`);
-    moveDiv.style.top = `-${d * s}px`;
-  };
-  const interviewDiv = document.querySelector(".item2");
-  interviewDiv.addEventListener("scroll", () => {
-    scrllpara("img__postion", interviewDiv.scrollTop, 1.5);
-  });
-};
-scrollDiv();

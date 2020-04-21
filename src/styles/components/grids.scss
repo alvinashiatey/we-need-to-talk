@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns:
     [page-start] auto [col-end0 col-start1] minmax(min-content, auto)
-    [col-end1 col-start2] 3fr [col-end2 col-start3] minmax(min-content, 2fr)
+    [col-end1 col-start2] 3fr [col-end2 col-start3] minmax(min-content, 30rem)
     [page-end];
   gap: 2px;
   padding: 1px;
